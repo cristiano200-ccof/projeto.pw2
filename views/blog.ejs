@@ -1,0 +1,225 @@
+/*<!-- views/blog.ejs -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+      <link rel="stylesheet" href="/stylesheets/style.css"  >
+    <title >Blog de Poemas</title>
+
+   <%- include('partials/header') %>
+
+<main  style="background-color: #ffffff; min-height: 80vh; padding: 40px 0;" class="style-pagi">
+   
+    <div class="container">
+        <h1>Mural de Poemas</h1>
+        <p>Olá, <strong><%= usuario.nome %></strong>! Você está logado como: <em><%= usuario.tipo %></em></p>
+
+        <!-- AREA EXCLUSIVA DO ALUNO: Formulário para enviar novos poemas -->
+        <% if (usuario.tipo === 'aluno') { %>
+            <div class="card" style="border-top: 5px solid #2ecc71;">
+                <h3>Compartilhe seu Poema</h3>
+                <form action="/blog/postar" method="POST">
+                    <label>Título do Poema:</label>
+                    <input type="text" name="titulo" required placeholder="Digite o título...">
+                    
+                    <label>Seu Poema:</label>
+                    <textarea name="conteudo" rows="5" required placeholder="Escreva seus versos aqui..."></textarea>
+                    
+                    <button type="submit" class="btn" style="background-color: #2ecc71;">Publicar Poema</button>
+                </form>
+            </div>
+        <% } %>
+
+        <hr>
+
+        <!-- FEED GERAL: Exibição de todos os poemas postados -->
+        <h2>Poemas Recentes</h2>
+        
+        <% if (poemas.length === 0) { %>
+            <p>Nenhum poema foi postado ainda.</p>
+        <% } else { %>
+            <% poemas.forEach(poema => { %>
+                <div class="card">
+                    <h2>"<%= poema.titulo %>"</h2>
+                    <p style="color: #666; font-size: 0.9em;">Por: <strong><%= poema.autor %></strong></p>
+                    <blockquote style="font-style: italic; white-space: pre-wrap; font-size: 1.1em; background: #fafafa; padding: 15px; border-radius: 5px;"><%= poema.conteudo %></blockquote>
+
+                    <!-- Seção de Feedbacks/Avaliações -->
+                    <div style="margin-top: 20px;">
+                        <h4>Feedbacks dos Professores:</h4>
+                        <% if (poema.feedbacks.length === 0) { %>
+                            <p style="color: #999; font-size: 0.9em;">Aguardando avaliação pedagógica.</p>
+                        <% } else { %>
+                            <% poema.feedbacks.forEach(fb => { %>
+                                <div class="feedback-box">
+                                    <p style="margin: 0;"><%= fb %></p>
+                                </div>
+                            <% }) %>
+                        <% } %>
+                    </div>
+
+                    <!-- AREA EXCLUSIVA DO PROFESSOR: Formulário para deixar um feedback no poema específico -->
+                    <% if (usuario.tipo === 'professor') { %>
+                        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                            <form action="/blog/feedback/<%= poema.id %>" method="POST">
+                                <label style="font-size: 0.9em; font-weight: bold;">Deixar Feedback Pedagógico:</label>
+                                <textarea name="textoFeedback" rows="2" required placeholder="Escreva uma orientação ou elogio para o aluno..."></textarea>
+                                <button type="submit" class="btn">Enviar Avaliação</button>
+                            </form>
+                        </div>
+                    <% } %>
+
+                </div>
+            <% }) %>
+        <% } %>
+
+    </div>
+</main>
+</html>
+*/
+
+
+<!-- views/blog.ejs -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Blog de Poemas</title>
+    
+    <style>
+        /* CSS adicional simples para alinhar a API sem quebrar seu layout original */
+        .layout-mural {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        .feed-alunos {
+            flex: 3; /* Ocupa a maior parte da tela */
+        }
+        .barra-lateral-api {
+            flex: 1; /* Ocupa a barra lateral */
+            min-width: 280px;
+        }
+        .banner-frase {
+            background-color: #f1f8ff; 
+            border-left: 5px solid #2ecc71; 
+            padding: 15px; 
+            border-radius: 5px; 
+            margin-bottom: 25px; 
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<%- include('partials/header') %>
+
+<main style="background-color: #ffffff; min-height: 80vh; padding: 40px 0;" class="style-pagi">
+   
+    <div class="container">
+        <h1>Mural de Poemas</h1>
+        <p>Olá, <strong><%= usuario.nome %></strong>! Você está logado como: <em><%= usuario.tipo %></em></p>
+
+        <!-- BANNER DE INSPIRAÇÃO: Frase dinâmica vinda da API externa -->
+        <div class="banner-frase">
+            <strong>💡 Frase inspiradora do dia:</strong> 
+            <span>"<%= fraseDia %>"</span>
+        </div>
+
+        <!-- DIVISÃO EM DUAS COLUNAS: Alunos (Esquerda) e API Poemas Clássicos (Direita) -->
+        <div class="layout-mural">
+            
+            <!-- COLUNA DA ESQUERDA: FEED DA ESCOLA -->
+            <div class="feed-alunos">
+                
+                <!-- AREA EXCLUSIVA DO ALUNO: Formulário para enviar novos poemas -->
+                <% if (usuario.tipo === 'aluno') { %>
+                    <div class="card" style="border-top: 5px solid #2ecc71;">
+                        <h3>Compartilhe seu Poema</h3>
+                        <form action="/blog/postar" method="POST">
+                            <label>Título do Poema:</label>
+                            <input type="text" name="titulo" required placeholder="Digite o título...">
+                            
+                            <label>Seu Poema:</label>
+                            <textarea name="conteudo" rows="5" required placeholder="Escreva seus versos aqui..."></textarea>
+                            
+                            <button type="submit" class="btn" style="background-color: #2ecc71;">Publicar Poema</button>
+                        </form>
+                    </div>
+                <% } %>
+
+                <hr>
+
+                <!-- FEED GERAL: Exibição de todos os poemas postados -->
+                <h2>Poemas Recentes</h2>
+                
+                <% if (poemas.length === 0) { %>
+                    <p>Nenhum poema foi postado ainda.</p>
+                <% } else { %>
+                    <% poemas.forEach(poema => { %>
+                        <div class="card">
+                            <h2>"<%= poema.titulo %>"</h2>
+                            <!-- AJUSTE AQUI: Lendo o nome resolvido pela Chave Estrangeira do MongoDB -->
+                            <p style="color: #666; font-size: 0.9em;">Por: <strong><%= poema.autor ? poema.autor.nome : 'Autor Desconhecido' %></strong></p>
+                            <blockquote style="font-style: italic; white-space: pre-wrap; font-size: 1.1em; background: #fafafa; padding: 15px; border-radius: 5px;"><%= poema.conteudo %></blockquote>
+
+                            <!-- Seção de Feedbacks/Avaliações -->
+                            <div style="margin-top: 20px;">
+                                <h4>Feedbacks dos Professores:</h4>
+                                <% if (poema.feedbacks.length === 0) { %>
+                                    <p style="color: #999; font-size: 0.9em;">Aguardando avaliação pedagógica.</p>
+                                <% } else { %>
+                                    <% poema.feedbacks.forEach(fb => { %>
+                                        <div class="feedback-box">
+                                            <p style="margin: 0;"><%= fb %></p>
+                                        </div>
+                                    <% }) %>
+                                <% } %>
+                            </div>
+
+                            <!-- AREA EXCLUSIVA DO PROFESSOR: Formulário para deixar um feedback -->
+                            <% if (usuario.tipo === 'professor') { %>
+                                <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                                    <form action="/blog/feedback/<%= poema.id %>" method="POST">
+                                        <label style="font-size: 0.9em; font-weight: bold;">Deixar Feedback Pedagógico:</label>
+                                        <textarea name="textoFeedback" rows="2" required placeholder="Escreva uma orientação ou elogio para o aluno..."></textarea>
+                                        <button type="submit" class="btn">Enviar Avaliação</button>
+                                    </form>
+                                </div>
+                            <% } %>
+
+                        </div>
+                    <% }) %>
+                <% } %>
+
+            </div> <!-- FIM DA COLUNA DA ESQUERDA -->
+
+
+            <!-- COLUNA DA DIREITA: BARRA LATERAL COM A API DE POEMAS EXTERNOS -->
+            <aside class="barra-lateral-api">
+                <div class="card" style="border-top: 5px solid #3498db; position: sticky; top: 20px;">
+                    <h3 style="margin-top: 0; color: #3498db;">📚 Grandes Clássicos</h3>
+                    <p style="font-size: 0.85em; color: #777; margin-bottom: 15px;">Recomendações trazidas via API externa para inspiração literária:</p>
+
+                    <% if (feedExterno.length === 0) { %>
+                        <p style="font-size: 0.9em; color: #999;">Carregando referências mundiais...</p>
+                    <% } else { %>
+                        <% feedExterno.forEach(poemaExt => { %>
+                            <div style="border-bottom: 1px dashed #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                                <h4 style="margin: 0 0 3px 0; color: #3498db;"><%= poemaExt.titulo %></h4>
+                                <small style="color: #666; display: block; margin-bottom: 8px;">Por: <strong><%= poemaExt.autor %></strong></small>
+                                
+                                <p style="font-family: serif; font-size: 0.95em; color: #444; background: #fafafa; padding: 10px; border-radius: 4px; line-height: 1.4; margin: 0;">
+                                    <%- poemaExt.conteudo %>
+                                </p>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                </div>
+            </aside> <!-- FIM DA COLUNA DA DIREITA -->
+
+        </div> <!-- FIM DO LAYOUT MURAL -->
+
+    </div>
+</main>
+</html>

@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+  color: black;
+  background-color: white;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+
+/* Estilo para a Logo em Texto e Ícone */
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 10px; /* Espaço entre o ícone e o texto */
+}
+
+.logo-icon {
+  font-size: 24px;
+  /* Efeito de brilho poético no ícone */
+  filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5)); 
+}
+
+.logo-text {
+  color: #ffffff;
+  font-family: 'Georgia', serif; /* Fonte clássica/literária */
+  font-style: italic;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+
+.container-poema {
+  max-width: 800px !important; /* Largura máxima confortável para leitura */
+  width: 100%;
+  margin: 40px auto !important; /* Centraliza na tela e afasta do topo/rodapé */
+  padding: 0 20px; /* Margem interna para o texto não colar nas bordas */
+  
+  /* Garante que palavras longas quebrem de linha em vez de vazar */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Ajuste opcional para deixar os parágrafos mais poéticos */
+.container-poema p {
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  line-height: 1.8; /* Melhora o espaço entre as linhas */
+  color: #2b2b2b;
+  margin-bottom: 20px;
+}

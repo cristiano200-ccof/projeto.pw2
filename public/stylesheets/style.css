@@ -1,0 +1,249 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+  color: black;
+  background-color: white;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 1.5rem;
+  font-family: 'Georgia',serif;
+   font-size: 2.5rem;
+    text-align: center;
+     margin-bottom: 40px;
+      font-weight: bold;
+       color: #1a1a1a;
+}
+
+
+
+
+/* Estilo para a Logo em Texto e Ícone 
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 10px; /* Espaço entre o ícone e o texto 
+}
+
+.logo-icon {
+  font-size: 24px;
+  /* Efeito de brilho poético no ícone 
+  filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5)); 
+}
+
+.logo-text {
+  color: #ffffff;
+  font-family: 'Georgia', serif; /* Fonte clássica/literária 
+  font-style: italic;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+
+.container-poema {
+  max-width: 800px !important; /* Largura máxima confortável para leitura */
+ /* width: 100%;
+  margin: 40px auto !important; /* Centraliza na tela e afasta do topo/rodapé 
+  padding: 0 20px; /* Margem interna para o texto não colar nas bordas 
+  
+  /* Garante que palavras longas quebrem de linha em vez de vazar */
+ /* word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Ajuste opcional para deixar os parágrafos mais poéticos 
+.container-poema p {
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  line-height: 1.8;  Melhora o espaço entre as linhas */
+ /* color: #2b2b2b;
+  margin-bottom: 20px;
+}
+
+
+*/
+
+
+.titulo{
+  max-width: 750px;
+   margin: 0 auto;
+    padding: 0 20px;
+     font-family: 'Georgia', serif;
+      font-size: 1.15rem;
+       line-height: 1.8;
+        color: #222222;
+         word-wrap: break-word;
+}
+
+.itens{
+  background: #1a1a1a;
+   color: white; 
+   padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.capitulo{
+ font-family: 'Georgia', serif;
+ font-size: 1.8rem;
+ margin-top: 40px;
+ margin-bottom: 20px;
+ border-bottom: 2px solid #1a1a1a;
+  padding-bottom: 10px;
+}
+
+.subcapitulos{
+  font-size: 1.4rem;
+   margin-bottom: 5px;
+    color: #1a1a1a;
+
+}
+
+h4{
+  font-size: 1.25rem;
+  margin-bottom: 5px;
+  color: #1a1a1a;
+}
+
+
+.botao{
+  margin-top: 30px;
+   font-weight: 700;
+    border-radius: 4px;
+    background: 0.3s ease;
+   color: #0d78c0;
+}
+
+.subrodapelogin{
+   text-align: center;
+     color: #888;
+      font-size: 0.9em;
+       margin-top: 15px;
+}
+
+
+.stylecardlogin{
+  padding: 40px 30px;
+   border-radius: 8px;
+   border-top: 5px solid #2ecc71
+}
+
+
+.poemastyle{
+  margin: 0;
+   display: flex; 
+   justify-content: space-between;
+}
+
+.subpoemastyle{
+  margin: 0 0 15px 0; 
+  display: flex; 
+  justify-content: space-between;
+}
+
+.poemastyle2{
+  font-family: sans-serif; 
+  font-size: 0.8rem; 
+  color: #888; 
+  font-style: normal;
+}
+
+.mes_error{
+  color: red; 
+  margin-bottom: 15px; 
+  font-weight: bold;
+}
+
+
+.bodyblog { 
+  font-family: Arial, sans-serif; 
+  margin: 0; 
+  padding: 0; 
+  background-color: #f4f6f9; 
+}
+        
+.container {
+   padding: 20px; 
+   max-width: 800px; 
+   margin: 0 auto;
+   }
+
+
+.card {
+   background: white; 
+   padding: 20px; 
+   margin-bottom: 20px; 
+   border-radius: 8px; 
+   box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+  }
+
+ .feedback-box { 
+   background: #f9f9f9; 
+   padding: 10px; margin-top: 10px; 
+   border-left: 4px solid #007bff; 
+   border-radius: 4px; 
+  }
+
+  .btn { background: #007bff; 
+    color: white; 
+    border: none; 
+    padding: 10px 15px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+  }
+
+   .textarea, input[type="text"] { 
+      width: 100%; 
+      padding: 8px; 
+      margin: 5px 0 15px 0; 
+      border: 1px solid #ccc; 
+      border-radius: 4px; 
+      box-sizing: border-box;
+     }
+
+
+  .style-pagi {
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    background-color: #f4f6f9; 
+    min-height: 80vh; padding: 40px 0
+  }
+
+  .container { 
+    padding: 20px; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    color: rgb(28, 170, 139);
+  }
+
+  .card { 
+    background: white; 
+    padding: 20px; margin-bottom: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+  }
+
+  .feedback-box { 
+    background: #f9f9f9; 
+    padding: 10px; 
+    margin-top: 10px;
+     border-left: 4px solid #007bff; 
+     border-radius: 4px; 
+    }
+
+  .btn { 
+    background: #007bff; 
+    color: white; 
+    border: none; 
+    padding: 10px 15px; 
+    border-radius: 4px; 
+    cursor: pointer; }
+    
+   

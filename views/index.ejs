@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css"  >
+  <title>Pagina de login</title>
+ 
+  <main  style="background-color: #ffff; min-height: 80vh; padding: 40px 0;">
+  <div  class="titulo">
+    
+    <!-- Cartão de Login Estilizado -->
+    <div class="stylecardlogin">
+      
+      <!-- Cabeçalho do Formulário -->
+      <div  style="margin-bottom: 30px;">
+        <i  style="font-size: 2.5em; margin-bottom: 10px; "></i>
+        <div class="content" style="color: #1ea386; font-weight: 700;">
+          Mural dos Poemas
+          <div class="sub header" style="margin-top: 5px; color: #1ea386;">Identifique-se para acessar o sistema</div>
+        </div>
+      </div>
+
+
+
+<!-- Se a variável 'error' contiver algum texto, este bloco será exibido -->
+   <!-- CÓDIGO NOVO (SEGURO) -->
+<% if (locals.error) { %>
+    <div class="mens_error">
+        <%= error %>
+    </div>
+<% } %>
+
+      <!-- Formulário que envia os dados para a rota que criamos -->
+      <form action="/" method="POST" class="ui form large">
+        
+        <!-- Campo de Seleção do Tipo de Usuário -->
+        <div class="field">
+          <label style="color: #555; font-weight: 600;"><i class="users icon"></i> Você é:</label><br>
+          <select name="tipo" class="ui fluid dropdown" required style="border-radius: 4px;">
+            <option value="" disabled selected>Selecione seu perfil...</option>
+            <option value="aluno">Aluno</option>
+            <option value="professor">Professor</option>
+          </select>
+        </div>
+
+        <!-- Campo de E-mail -->
+        <div class="field" style="margin-top: 20px;">
+          <label style="color: #555; font-weight: 600;"><i class="envelope icon"></i> E-mail</label>
+          <div class="ui left icon input">
+            <i class="mail icon" style="color: #00b5ad;"></i>
+            <input type="email" name="email" placeholder="exemplo@escola.com" required style="border-radius: 4px;">
+          </div>
+        </div>
+
+        <!-- Campo de Senha -->
+        <div class="field" style="margin-top: 20px;">
+          <label style="color: #555; font-weight: 600;"><i class="lock icon"></i> Senha</label>
+          <div class="ui left icon input">
+            <i class="lock icon" style="color: #00b5ad;"></i>
+            <input type="password" name="senha" placeholder="Digite sua senha" required style="border-radius: 4px;">
+          </div>
+        </div>
+
+        <!-- Botão de Envio Largo (Teal) -->
+        <button type="submit" class="botao">
+          Entrar no Sistema
+        </button>
+
+        <div style="text-align: center; margin-top: 15px;">
+  <a href="/cadastro" style="color: #1ea386; text-decoration: none;">Não tem conta? Cadastre-se aqui</a>
+</div>
+
+      </form>
+      
+    </div>
+
+    <!-- Mensagem de suporte opcional abaixo do card -->
+    <div class="subrodapelogin">
+      Esqueceu seus dados? Entre em contato com a secretaria da escola.
+    </div>
+  </div>
+  
+</main>
+
+<%- include('partials/footer') %>
+</html>

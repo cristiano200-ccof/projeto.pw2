@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>Criar Nova Conta</title>
+</head>
+<body>
+  <main style="background-color: #ffff; min-height: 80vh; padding: 40px 0; display: flex; justify-content: center; align-items: center;">
+    <div class="titulo" style="width: 100%; max-width: 400px;">
+      
+      <div class="stylecardlogin" style="padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <div style="margin-bottom: 20px; text-align: center;">
+          <div class="content" style="color: #1ea386; font-weight: 700; font-size: 1.5em;">
+            Mural dos Poemas
+            <div class="sub header" style="margin-top: 5px; color: #555; font-size: 0.9em;">Crie sua conta para acessar</div>
+          </div>
+        </div>
+
+        <!-- Formulário que envia os dados para a rota de cadastro -->
+        <form action="/cadastrar" method="POST" class="ui form large">
+          
+          <!-- Campo Nome -->
+          <div class="field">
+            <label style="color: #555; font-weight: 600;">Nome Completo</label>
+            <input type="text" name="nome" placeholder="Seu nome" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc;">
+          </div>
+
+          <!-- Campo Tipo de Usuário -->
+          <div class="field" style="margin-top: 15px;">
+            <label style="color: #555; font-weight: 600;">Você é:</label>
+            <select name="tipo" class="ui fluid dropdown" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc;">
+              <option value="" disabled selected>Selecione seu perfil...</option>
+              <option value="aluno">Aluno</option>
+              <option value="professor">Professor</option>
+            </select>
+          </div>
+
+          <!-- Campo E-mail -->
+          <div class="field" style="margin-top: 15px;">
+            <label style="color: #555; font-weight: 600;">E-mail</label>
+            <input type="email" name="email" placeholder="exemplo@escola.com" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc;">
+          </div>
+
+          <!-- Campo Senha -->
+          <div class="field" style="margin-top: 15px;">
+            <label style="color: #555; font-weight: 600;">Senha</label>
+            <input type="password" name="senha" placeholder="Digite sua senha" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc;">
+          </div>
+
+          <!-- Botão de Cadastro -->
+          <button type="submit" class="botao" style="width: 100%; margin-top: 20px; padding: 12px; background-color: #1ea386; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+            Cadastrar Conta
+          </button>
+
+        </form>
+
+        <!-- Link para voltar ao Login -->
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="/" style="color: #1ea386; text-decoration: none; font-size: 0.9em;">Já tem uma conta? Faça login</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>
