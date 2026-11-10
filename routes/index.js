@@ -142,10 +142,32 @@ const PoemaSchema = new mongoose.Schema({
 
 const Poema = mongoose.models.Poema || mongoose.model('Poema', PoemaSchema);
 
+/*
 // ROTA DA PÁGINA DE LOGIN (Renderiza a tela inicial)
 router.get('/', (req, res) => {
     res.render('index', { erro: null }); 
 });
+*/
+
+// ROTA DA PÁGINA DE LOGIN (Atualizada com a API de Frases)
+router.get('/', async (req, res) => {
+    let fraseInspiradora = "A poesia é a música da alma.";
+
+    try {
+        // Busca uma frase aleatória da mesma API usada no blog
+        const respostaFrase = await fetch('https://adviceslip.com');
+        if (respostaFrase.ok) {
+            const dadosFrase = await JSON.parse(await respostaFrase.text());
+            fraseInspiradora = dadosFrase.slip.advice; 
+        }
+    } catch (erroApi) {
+        console.error("Aviso: Falha ao buscar frase para o login, usando padrão.", erroApi.message);
+    }
+
+    // Passa a frase para o arquivo index.ejs
+    res.render('index', { erro: null, fraseDia: fraseInspiradora }); 
+});
+
 
 // 2. ROTA DE AUTENTICAÇÃO (CORRIGIDA: Ajustado de '/index' para '/' para alinhar com o formulário)
 router.post('/', async (req, res) => {
