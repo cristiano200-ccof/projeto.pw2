@@ -41,7 +41,7 @@ router.get('/', (req, res) => {
 
 // ROTA DA PÃGINA DE LOGIN (Atualizada com a API de Frases)
 router.get('/', async (req, res) => {
-    let fraseInspiradora = "A poesia é a musica da alma.";
+    let fraseInspiradora = "A poesia Ã© a musica da alma.";
 
     try {
         // Busca uma frase aleatÃ³ria da mesma API usada no blog
@@ -50,11 +50,11 @@ router.get('/', async (req, res) => {
             const dadosFrase = await respostaFrase.json();
             if (dadosFrase.frases && dadosFrase.frases.length > 0){
              const sorteada = dadosFrase.frases[Math.floor(Math.random() * dadosFrase.frases.length)]
-            fraseInspiradora = '${sorteada.texto — ${sorteada.autor}'; 
+            fraseInspiradora = `${sorteada.texto} - ${sorteada.autor}`; 
         }
     }
     } catch (erroApi) {
-        console.error("Aviso: Falha ao buscar frase para o login, usando padrão.", erroApi.message);
+        console.error("Aviso: Falha ao buscar frase para o login, usando padrÃ£o.", erroApi.message);
     }
 
     // Passa a frase para o arquivo index.ejs
@@ -84,7 +84,7 @@ router.post('/', async (req, res) => {
             // Salva a sessÃ£o com seguranÃ§a e redireciona apenas uma vez
             req.session.save((err) => {
                 if (err) {
-                    console.error("Erro ao salvar a sessão:", err);
+                    console.error("Erro ao salvar a sessï¿½o:", err);
                 }
                 return res.redirect('/tutorial');
             });
@@ -93,11 +93,11 @@ router.post('/', async (req, res) => {
             // CORREÃ‡ÃƒO: VariÃ¡vel padronizada para 'erro' para nÃ£o quebrar o EJS
             return res.render('index', {
                  erro: 'E-mail ou senha incorretos!',
-                 fraseDia: "A poesia é a música da alma" });
+                 fraseDia: "A poesia ï¿½ a mï¿½sica da alma" });
         }
     } catch (err) {
         console.error("Erro no login:", err);
-        res.status(500).send("Erro interno no servidor. Verifique a conexão com o banco de dados.");
+        res.status(500).send("Erro interno no servidor. Verifique a conexï¿½o com o banco de dados.");
     }
 });
 
@@ -116,7 +116,7 @@ router.post('/cadastrar', async (req, res) => {
         res.redirect('/'); 
     } catch (err) {
         console.error("Erro ao cadastrar:", err);
-        res.status(500).send("Erro ao criar conta. O e-mail já pode estar em uso.");
+        res.status(500).send("Erro ao criar conta. O e-mail jï¿½ pode estar em uso.");
     }
 });
 

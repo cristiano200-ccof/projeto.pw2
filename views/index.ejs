@@ -29,12 +29,8 @@
                 <%= error %>
             </div>
         <% } %>
-        <% if (locals.erro) { %>
-            <div class="mens_error">
-                <%= erro %>
-            </div>
-        <% } %>
-
+      
+        
         <!-- Formulário que envia os dados para a rota que criamos -->
         <form action="/" method="POST" class="ui form large">
           
@@ -82,7 +78,7 @@
       <!-- CÓDIGO NOVO INTEGRAD0: Exibe a frase da API de forma suave abaixo do cartão -->
       <% if (locals.fraseDia) { %>
         <div style="max-width: 450px; margin: 20px auto; text-align: center; font-style: italic; color: #555; background: #e0f2f1; padding: 12px; border-radius: 6px; border-left: 4px solid #1ea386;">
-            <strong>💡 Inspiração para hoje:</strong><br>
+            <strong>Inspiração para hoje:</strong><br>
             "<%= fraseDia %>"
         </div>
       <% } %>
