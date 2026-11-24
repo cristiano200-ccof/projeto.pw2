@@ -202,3 +202,16 @@ h4{
     cursor: pointer; }
     
    
+  .fedpedagogico{
+    width: 100%; 
+    box-sizing: border-box; 
+    resize: none; 
+    overflow: hidden; 
+    padding: 12px; 
+    font-size: 1rem; 
+    line-height: 1.5; 
+    border: 1px solid #ccc;
+     border-radius: 5px; 
+     display: block; 
+     margin-bottom: 15px
+  }

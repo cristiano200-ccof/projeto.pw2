@@ -37,22 +37,55 @@ const Poema = mongoose.models.Poema || mongoose.model('Poema', PoemaSchema);
 router.get('/', (req, res) => {
     res.render('index', { erro: null }); 
 });
-*/
+
 
 // ROTA DA PÝGINA DE LOGIN (Atualizada com a API de Frases)
+//router.get('/', async (req, res) => {
+ //   let fraseInspiradora = "A poesia é a musica da alma.";
+
+ //   try {
+ ///       // Busca uma frase aleatória da mesma API usada no blog
+//        const respostaFrase = await fetch('https://versel.app');
+ //       if (respostaFrase.ok) {
+ //           const dadosFrase = await respostaFrase.json();
+  //          if (dadosFrase.frases && dadosFrase.frases.length > 0){
+ ////            const sorteada = dadosFrase.frases[Math.floor(Math.random() * dadosFrase.frases.length)]
+ //           fraseInspiradora = `${sorteada.texto} - ${sorteada.autor}`; 
+ //       }
+ //   }
+ //   } catch (erroApi) {
+ //       console.error("Aviso: Falha ao buscar frase para o login, usando padrão.", erroApi.message);
+ //   }
+
+    // Passa a frase para o arquivo index.ejs
+ // res.render('index', { erro: null, fraseDia: fraseInspiradora }); 
+//});*/
+
+
+// ROTA DA PÁGINA DE LOGIN (Atualizada com a API de Frases)
 router.get('/', async (req, res) => {
-    let fraseInspiradora = "A poesia é a musica da alma.";
+    let fraseInspiradora = "A poesia é a música da alma.";
 
     try {
-        // Busca uma frase aleatória da mesma API usada no blog
-        const respostaFrase = await fetch('https://versel.app');
+        // 1. Busca uma frase aleatória da DummyJSON
+        const respostaFrase = await fetch('https://dummyjson.com');
+        
         if (respostaFrase.ok) {
             const dadosFrase = await respostaFrase.json();
-            if (dadosFrase.frases && dadosFrase.frases.length > 0){
-             const sorteada = dadosFrase.frases[Math.floor(Math.random() * dadosFrase.frases.length)]
-            fraseInspiradora = `${sorteada.texto} - ${sorteada.autor}`; 
+            
+            // 2. Traduz a frase para português usando a MyMemory API
+            const urlTraducao = `https://translated.net{encodeURIComponent(dadosFrase.quote)}&langpair=en|pt-BR`;
+            const respTraducao = await fetch(urlTraducao);
+            
+            if (respTraducao.ok) {
+                const dadosTraducao = await respTraducao.json();
+                const textoTraduzido = dadosTraducao.responseData.translatedText;
+                fraseInspiradora = `${textoTraduzido} - ${dadosFrase.author}`;
+            } else {
+                // Caso a tradução falhe, exibe a frase original em inglês
+                fraseInspiradora = `${dadosFrase.quote} - ${dadosFrase.author}`;
+            }
         }
-    }
     } catch (erroApi) {
         console.error("Aviso: Falha ao buscar frase para o login, usando padrão.", erroApi.message);
     }
@@ -60,6 +93,8 @@ router.get('/', async (req, res) => {
     // Passa a frase para o arquivo index.ejs
     res.render('index', { erro: null, fraseDia: fraseInspiradora }); 
 });
+
+
 
 
 // 2. ROTA DE AUTENTICAÇÃO (CORRIGIDA: Ajustado de '/index' para '/' para alinhar com o formulário)
@@ -116,7 +151,7 @@ router.post('/cadastrar', async (req, res) => {
         res.redirect('/'); 
     } catch (err) {
         console.error("Erro ao cadastrar:", err);
-        res.status(500).send("Erro ao criar conta. O e-mail j� pode estar em uso.");
+        res.status(500).send("Erro ao criar conta. O e-mail já pode estar em uso.");
     }
 });
 
